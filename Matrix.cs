@@ -25,6 +25,13 @@ namespace Hex{
             return length * y + x + y / 2;
         }
 
+        public bool IsOutOfArrayBounds(int index){
+            return index < 0 || index >= data.Length;
+        }
+        public bool IsOutOfBounds(Vector index){
+            return (index.x < -index.y/2 || index.x >= length -index.y/2) || IsOutOfArrayBounds(MapHexInto1DArray(index.x, index.y));
+        }
+
         ///<summary> project a index into a 3D Hexagon Vector </summary>
         public Vector Project1DArrayIntoHex(int i) {
             int y = i / length;
