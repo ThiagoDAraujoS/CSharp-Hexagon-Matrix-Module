@@ -26,8 +26,24 @@ namespace Hex{
         
         public static readonly Vector ZPos = new Vector( 1, -1,  0);
         public static readonly Vector ZNeg = new Vector(-1,  1,  0);
-        
-        public int Distance(Vector target) {
+
+		private static readonly float sqrOf3 = Mathf.Sqrt(3f);
+
+		///<summary> Returns a physical position of a given hexagon inside this container </summary>
+		public Vector3 Position(float size, float height = 0f) {
+			return new Vector3(
+				size * ( sqrOf3 * (float)x + sqrOf3 / 2f * (float)y ),
+				height,
+				size * ( 3f / 2f * y ));
+		}
+		///<summary> Returns a hexagon ID from a x and z coordinate position</summary>
+		public Vector PointToIndex(float size) {
+			float Ix = ( sqrOf3 / 3f * x - 1f / 3f * z ) / size;
+			float Iy = ( 2f / 3f * z ) / size;
+			return Vector.Round(new Vector3(Ix, Iy, -Ix - Iy));
+		}
+
+		public int Distance(Vector target) {
             return ( System.Math.Abs(x - target.x) + System.Math.Abs(y - target.y) + System.Math.Abs(z - target.z) ) / 2;
         }
 

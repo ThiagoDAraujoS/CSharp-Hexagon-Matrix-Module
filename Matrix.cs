@@ -1,78 +1,89 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace Hex{
-    ///<summary> The Matrix is the Main data container in this module, it offers an Hexagon matrix's interface to a 1D array </summary>
-    public class Matrix<T> : System.Collections.Generic.IEnumerator<T>
-    {
-        ///<summary>The data saved inside this container </summary>
-        protected T[] data;
+namespace Hex {
 
-        ///<summary> The size of the data inside this container </summary>
-        protected int length;
+	public abstract class Matrix<T> : IEnumerator<T> {
+		/// <summary>
+		/// The data saved inside this container
+		/// </summary>
+		protected T[] data;
 
-        ///<summary> An iterator used by the IEnumerator </summary>
-        private int iterator = 0;
+		/// <summary>
+		/// Predicate if the Id is > than the array's length
+		/// </summary>
+		public bool IsOutOfArrayBounds(int index) => index < 0 || index >= data.Length;
 
-        ///<summary> The current element pointed by the IEnumerator </summary>
-        public T Current => data[iterator];
+		/// <summary>
+		/// Indexer using cube coordinates to a hexagon
+		/// </summary>
+		/// <returns>Element</returns>
+		public T this[int x, int y, int z = 0] {
+			get => data[MapHexInto1DArray(x, y)];
+			set => data[MapHexInto1DArray(x, y)] = value;
+		}
 
-        ///<summary> The current element pointed by the IEnumerator </summary>
-        object IEnumerator.Current => Current;
+		/// <summary>
+		/// Indexer using 1D index to get a hexagon
+		/// </summary>
+		/// <param name="i">ID</param>
+		/// <returns>Element</returns>
+		public T this[Vector i] {
+			get => this[i.x, i.y];
+			set => this[i.x, i.y] = value;
+		}
 
-        ///<summary> This maps an axial coordinate system into a 1D index, its used to access the data array containing the Hex's info </summary>
-        public int MapHexInto1DArray(int x, int y) {
-            return length * y + x + y / 2;
-        }
+		/// <summary>
+		/// Start Building a hexagon Matrix
+		/// </summary>
+		public Matrix(int length) => data = new T[length];
 
-        public bool IsOutOfArrayBounds(int index){
-            return index < 0 || index >= data.Length;
-        }
-        public bool IsOutOfBounds(Vector index){
-            return (index.x < -index.y/2 || index.x >= length -index.y/2) || IsOutOfArrayBounds(MapHexInto1DArray(index.x, index.y));
-        }
+		/// <summary>
+		/// This maps an axial coordinate system into a 1D, 
+		/// its used to access the data array containing the Hex's info.
+		/// </summary>
+		/// <returns>1D Index</returns>
+		protected abstract int MapHexInto1DArray(int x, int y);
 
-        ///<summary> project a index into a 3D Hexagon Vector </summary>
-        public Vector Project1DArrayIntoHex(int i) {
-            int y = i / length;
-            int x = i % length - y / 2;
-            return new Vector(x, y,-x -y);
-        }
+		/// <summary>
+		/// Check if Cube index is out of bounds
+		/// </summary>
+		/// <param name="index">Cube index</param>
+		/// <returns>If is outside bounds.</returns>
+		public abstract bool IsOutOfBounds(Vector index);
 
-        ///<summary> an indexer using cube coordinates to a hexagon </summary>
-        public T this[int x, int y, int z = 0] {
-            get {   return data[MapHexInto1DArray(x, y)];}
-            set {   data[MapHexInto1DArray(x, y)] = value;}
-        }
+		/// <summary>
+		/// Project a index into a 3D Hexagon Cube Index 
+		/// </summary>
+		/// <param name="i">1D Index</param>
+		/// <returns>Cube Index</returns>
+		protected abstract Vector Project1DArrayIntoHex(int i);
 
-        ///<summary> an indexer using 1D index to get a hexagon </summary>
-        public T this[Vector i] {
-            get{    return this[i.x, i.y]; }
-            set{    this[i.x, i.y] = value; }
-        }
+		#region Custon Foreach
+		/// <summary> Delegate used to foreach the elements of this datastruct</summary>
+		/// <param name="index">The index of the item</param>
+		/// <param name="item">A ref to the item</param>
+		public delegate void ExplicitForeachOperationDelegate(Vector index, ref T item);
 
-        ///<summary> Builds a hexagon Matrix using a length and height values </summary>
-        public Matrix(int length, int height) {
-            this.length = length;
-            data = new T[length * height];
-        }
+		/// <summary>
+		/// foraches all hexagons using the "Explicit Foreach Operation Delegate" for each iteration (like LINQ does)
+		/// </summary>
+		/// <param name="action">The Action that will be called for each element of the structure</param>
+		public void Foreach(ExplicitForeachOperationDelegate action) {
+			for(int i = 0; i < data.Length; i++)
+				action(Project1DArrayIntoHex(i), ref data[i]);
+		}
+		#endregion
 
-        public delegate void ExplicitForeachOperationDelegate(Vector index, ref T item);
-        
-        ///<summary> foraches all hexagons using the "Explicit Foreach Operation Delegate" for each iteration (like LINQ does) </summary>
-        public void Foreach (ExplicitForeachOperationDelegate action) {
-            for (int i = 0; i < data.Length; i++)
-                action(Project1DArrayIntoHex(i), ref data[i]);
-        }
-        ///<summary> IEnumerator's move next method </summary>
-        public bool MoveNext() {
-            iterator++;
-            return (iterator < data.Length);
-        }
-        ///<summary> IEnumerator's Reset Method </summary>
-        public void Reset() { iterator = 0; }
-
-        ///<summary> IEnumerator's Dispose </summary>
-        public void Dispose(){ }
-    }
+		#region IEnumerator Implementation
+		int iterator = 0;
+		object IEnumerator.Current => data[iterator];
+		T IEnumerator<T>.Current => data[iterator];
+		bool IEnumerator.MoveNext() => ++iterator < data.Length;
+		void IEnumerator.Reset() => iterator = 0;
+		void IDisposable.Dispose() { }
+		#endregion
+	}
 }
