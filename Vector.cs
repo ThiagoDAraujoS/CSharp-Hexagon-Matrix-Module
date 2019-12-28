@@ -43,15 +43,20 @@ namespace Hex{
 			return Vector.Round(new Vector3(Ix, Iy, -Ix - Iy));
 		}
 
+
 		public int Distance(Vector target) {
             return ( System.Math.Abs(x - target.x) + System.Math.Abs(y - target.y) + System.Math.Abs(z - target.z) ) / 2;
         }
 
         public bool IsLegal { get { return x + y + z == 0; }  }
 
-        public static implicit operator Vector3(Vector o){
-            return new Vector3((float)o.x, 0f, (float)o.y);
+        public static implicit operator Vector3(Vector v){
+            return v.Position(1f, 0f);
         }
+        
+    //    public static implicit operator Vector3(Vector o){
+    //        return new Vector3((float)o.x, 0f, (float)o.y);
+    //   }
 
         public void Validate() {
             #if(UNITY_EDITOR)
