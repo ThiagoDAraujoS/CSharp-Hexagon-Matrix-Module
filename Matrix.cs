@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Hex {
-
-	public abstract class Matrix<T> : IEnumerator<T> {
+    public abstract class Matrix<T> : IEnumerable<T>{
 		/// <summary>
 		/// The data saved inside this container
 		/// </summary>
 		protected T[] data;
 
-		/// <summary>
-		/// Predicate if the Id is > than the array's length
-		/// </summary>
-		public bool IsOutOfArrayBounds(int index) => index < 0 || index >= data.Length;
+        /// <summary>
+        /// Predicate if the Id is > than the array's length
+        /// </summary>
+        public bool IsOutOfArrayBounds(int index) => index < 0 || index >= data.Length;
 
 		/// <summary>
 		/// Indexer using cube coordinates to a hexagon
@@ -61,7 +60,6 @@ namespace Hex {
 		/// <returns>Cube Index</returns>
 		protected abstract Vector Project1DArrayIntoHex(int i);
 
-		#region Custon Foreach
 		/// <summary> Delegate used to foreach the elements of this datastruct</summary>
 		/// <param name="index">The index of the item</param>
 		/// <param name="item">A ref to the item</param>
@@ -75,15 +73,9 @@ namespace Hex {
 			for(int i = 0; i < data.Length; i++)
 				action(Project1DArrayIntoHex(i), ref data[i]);
 		}
-		#endregion
 
-		#region IEnumerator Implementation
-		int iterator = 0;
-		object IEnumerator.Current => data[iterator];
-		T IEnumerator<T>.Current => data[iterator];
-		bool IEnumerator.MoveNext() => ++iterator < data.Length;
-		void IEnumerator.Reset() => iterator = 0;
-		void IDisposable.Dispose() { }
-		#endregion
-	}
+        public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)data).GetEnumerator();
+        
+        IEnumerator IEnumerable.GetEnumerator() => data.GetEnumerator();
+    }
 }
