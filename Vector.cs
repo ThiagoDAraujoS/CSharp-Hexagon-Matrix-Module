@@ -1,103 +1,77 @@
 using UnityEngine;
-///<summary>Vector Hex is a int vector3 like struct that contain hexagon coordinates, it also provides methods to deal with those coordinates and some shorthand readonly values</summary>
-namespace Hex{
-    public struct Vector{
+
+namespace Hex {
+    ///<summary>
+    /// Vector Hex is a int vector3 like struct that contain hexagon coordinates,
+    /// it also provides methods to deal with those coordinates and some shorthand readonly values
+    /// </summary>
+    public struct Vector {
         //x, y, z values
         public int x, y, z;
 
-        ///<summary>Builds vector from xyz coordinates</summary>
+        ///<summary>
+        /// Builds vector from xyz coordinates
+        /// </summary>
         public Vector(int x, int y, int z) {
             this.x = x;
             this.y = y;
             this.z = z;
-
         }
+
         public Vector(int x, int y) {
             this.x = x;
             this.y = y;
-            this.z = -x -y;
+            this.z = -x - y;
         }
 
-        public static readonly Vector XPos = new Vector( 0,  1, -1);
-        public static readonly Vector XNeg = new Vector( 0, -1,  1);
-        
-        public static readonly Vector YPos = new Vector( 1,  0, -1);
-        public static readonly Vector YNeg = new Vector(-1,  0,  1);
-        
-        public static readonly Vector ZPos = new Vector( 1, -1,  0);
-        public static readonly Vector ZNeg = new Vector(-1,  1,  0);
+        public static readonly Vector XPos = new Vector(0, 1, -1);
+        public static readonly Vector XNeg = new Vector(0, -1, 1);
 
-		private static readonly float sqrOf3 = Mathf.Sqrt(3f);
+        public static readonly Vector YPos = new Vector(1, 0, -1);
+        public static readonly Vector YNeg = new Vector(-1, 0, 1);
 
-		///<summary> Returns a physical position of a given hexagon inside this container </summary>
-		public Vector3 Position(float size, float height = 0f) {
-			return new Vector3(
-				size * ( sqrOf3 * (float)x + sqrOf3 / 2f * (float)y ),
-				height,
-				size * ( 3f / 2f * y ));
-		}
-		///<summary> Returns a hexagon ID from a x and z coordinate position</summary>
-		public Vector PointToIndex(float size) {
-			float Ix = ( sqrOf3 / 3f * x - 1f / 3f * z ) / size;
-			float Iy = ( 2f / 3f * z ) / size;
-			return Vector.Round(new Vector3(Ix, Iy, -Ix - Iy));
-		}
+        public static readonly Vector ZPos = new Vector(1, -1, 0);
+        public static readonly Vector ZNeg = new Vector(-1, 1, 0);
 
+        public static readonly float SqrOf3 = Mathf.Sqrt(3f);
 
-		public int Distance(Vector target) {
-            return ( System.Math.Abs(x - target.x) + System.Math.Abs(y - target.y) + System.Math.Abs(z - target.z) ) / 2;
-        }
+        ///<summary>
+        /// Returns a physical position of a given hexagon inside this container
+        /// </summary>
+        public Vector3 Position(float size, float height = 0f) =>
+            new Vector3(
+                size * (SqrOf3 * (float) x + SqrOf3 / 2f * (float) y),
+                height,
+                size * (3f / 2f * y));
 
-        public bool IsLegal { get { return x + y + z == 0; }  }
+        public int Distance(Vector target) =>
+            (System.Math.Abs(x - target.x) + System.Math.Abs(y - target.y) + System.Math.Abs(z - target.z)) / 2;
 
-        public static implicit operator Vector3(Vector v){
-            return v.Position(1f, 0f);
-        }
-        
-    //    public static implicit operator Vector3(Vector o){
-    //        return new Vector3((float)o.x, 0f, (float)o.y);
-    //   }
+        public bool IsLegal => x + y + z == 0;
+
+        public static implicit operator Vector3(Vector v) => v.Position(1f);
 
         public void Validate() {
-            #if(UNITY_EDITOR)
-                if(x + y + z != 0)
-                    throw new System.Exception("Illegal vector initialized");
-            #endif
-        }
-        public static Vector operator +(Vector num1, Vector num2){
-            return new Vector(
-                num1.x + num2.x, 
-                num1.y + num2.y, 
-                num1.z + num2.z
-            );
-        }
-        public static Vector operator -(Vector num1, Vector num2){
-            return new Vector(
-                num1.x - num2.x, 
-                num1.y - num2.y, 
-                num1.z - num2.z
-            );
-        }
-        public static Vector operator *(Vector num, int scalar){
-            return new Vector(
-                num.x * scalar, 
-                num.y * scalar, 
-                num.z * scalar
-            );
-        }
-        public static Vector operator /(Vector num, int scalar){
-            return new Vector(
-                num.x / scalar, 
-                num.y / scalar, 
-                num.z / scalar
-            );
-        }
-        public override string  ToString(){
-            return "Hex - X." + x + " Y." + y + " Z." + z;
+#if(UNITY_EDITOR)
+            if (!IsLegal)
+                throw new System.Exception("Illegal vector initialized");
+#endif
         }
 
-        ///<summary>Rounds a float Hex vector into a int hex vector
-        public static Vector Round(Vector3 vector){
+        public static Vector operator +(Vector v1, Vector v2) => new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+
+        public static Vector operator -(Vector v1, Vector v2) => new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+
+        public static Vector operator *(Vector v, int scalar) => new Vector(v.x * scalar, v.y * scalar, v.z * scalar);
+
+        public static Vector operator /(Vector v, int scalar) => new Vector(v.x / scalar, v.y / scalar, v.z / scalar);
+
+        public override string ToString() => "Hex - X." + x + " Y." + y + " Z." + z;
+
+        ///<summary>
+        /// Rounds a float Hex vector into a int hex vector
+        /// </summary>
+        public static Vector Round(Vector3 vector) {
             Vector rounded = new Vector(
                 Mathf.RoundToInt(vector.x),
                 Mathf.RoundToInt(vector.y),
@@ -109,12 +83,23 @@ namespace Hex{
                 Mathf.Abs(rounded.z - vector.z)
             );
             if (diff.x > diff.y && diff.x > diff.z)
-                rounded.x = -rounded.y -rounded.z;
+                rounded.x = -rounded.y - rounded.z;
             else if (diff.y > diff.z)
-                rounded.y = -rounded.x -rounded.z;
+                rounded.y = -rounded.x - rounded.z;
             else
-                rounded.z = -rounded.x -rounded.y;
+                rounded.z = -rounded.x - rounded.y;
             return rounded;
+        }
+    }
+
+    public static class Vector3Extension {
+        ///<summary>
+        /// Returns a hexagon ID from a x and z coordinate position
+        ///</summary>
+        public static Vector PointToHexVector(this Vector3 point, float size = 1f) {
+            float ix = (Vector.SqrOf3 / 3f * point.x - 1f / 3f * point.z) / size;
+            float iy = (2f / 3f * point.z) / size;
+            return Vector.Round(new Vector3(ix, iy, -ix - iy));
         }
     }
 }

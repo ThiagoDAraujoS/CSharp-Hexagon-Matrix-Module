@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Hex {
-    public abstract class Matrix<T> : IEnumerable<T>{
+	/// <summary>
+	/// Abstract implementation of a Hexagonal matrix 
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	public abstract class Matrix<T> : IEnumerable<T> {
 		/// <summary>
 		/// The data saved inside this container
 		/// </summary>
 		protected T[] data;
 
-        /// <summary>
-        /// Predicate if the Id is > than the array's length
-        /// </summary>
-        public bool IsOutOfArrayBounds(int index) => index < 0 || index >= data.Length;
+		/// <summary>
+		/// Predicate if index is out of 1d array bounds
+		/// </summary>
+		public bool IsOutOfArrayBounds(int index) => index < 0 || index >= data.Length;
 
 		/// <summary>
 		/// Indexer using cube coordinates to a hexagon
@@ -35,9 +37,9 @@ namespace Hex {
 		}
 
 		/// <summary>
-		/// Start Building a hexagon Matrix
+		/// Build new a hexagon Matrix
 		/// </summary>
-		public Matrix(int length) => data = new T[length];
+		protected Matrix(int length) => data = new T[length];
 
 		/// <summary>
 		/// This maps an axial coordinate system into a 1D, 
@@ -60,22 +62,24 @@ namespace Hex {
 		/// <returns>Cube Index</returns>
 		protected abstract Vector Project1DArrayIntoHex(int i);
 
-		/// <summary> Delegate used to foreach the elements of this datastruct</summary>
+		/// <summary>
+		/// Delegate used to iterate over the elements of this data structure
+		/// </summary>
 		/// <param name="index">The index of the item</param>
 		/// <param name="item">A ref to the item</param>
 		public delegate void ExplicitForeachOperationDelegate(Vector index, ref T item);
 
 		/// <summary>
-		/// foraches all hexagons using the "Explicit Foreach Operation Delegate" for each iteration (like LINQ does)
+		/// Iterate over hexagons
 		/// </summary>
 		/// <param name="action">The Action that will be called for each element of the structure</param>
 		public void Foreach(ExplicitForeachOperationDelegate action) {
-			for(int i = 0; i < data.Length; i++)
+			for (int i = 0; i < data.Length; i++)
 				action(Project1DArrayIntoHex(i), ref data[i]);
 		}
 
-        public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)data).GetEnumerator();
-        
-        IEnumerator IEnumerable.GetEnumerator() => data.GetEnumerator();
-    }
+		public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) data).GetEnumerator();
+
+		IEnumerator IEnumerable.GetEnumerator() => data.GetEnumerator();
+	}
 }
