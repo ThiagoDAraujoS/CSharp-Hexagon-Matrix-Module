@@ -1,4 +1,9 @@
 ## Description
+## Index
+1. Hex.Vector
+2. Hex.Matrix
+
+[here](#Hex.Square)
 
 # Classes
 
@@ -26,16 +31,6 @@ public static Main
 ~~~
 
 
-{% highlight ruby %}
-def foo
-  puts 'foo'
-end
-{% endhighlight %}
-
-{% highlight csharp %}
-public void Method(Test t){
-}
-{% endhighlight %}
 
 {% highlight c# %}
 public void Method(Test t){
