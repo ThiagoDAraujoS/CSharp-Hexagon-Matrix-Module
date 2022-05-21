@@ -1,3 +1,56 @@
+## Description
+
+# Classes
+
+## Hex.Vector
+### Description
+### Example
+~~~ c#
+~~~
+### Members
+~~~ c# 
+public static Test
+public static Main
+~~~
+
+## Hex.Matrix
+### Description
+### Example
+~~~ c#
+~~~
+
+## Hex.Square
+### Description
+### Example
+~~~ c#
+~~~
+
+
+{% highlight ruby %}
+def foo
+  puts 'foo'
+end
+{% endhighlight %}
+
+{% highlight csharp %}
+public void Method(Test t){
+}
+{% endhighlight %}
+
+{% highlight c# %}
+public void Method(Test t){
+}
+{% endhighlight %}
+
+
+
+
+
+
+~~~ c#
+public void int myVariable;
+~~~
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/ThiagoDAraujoS/CSharp-Hexagon-Matrix-Module/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
