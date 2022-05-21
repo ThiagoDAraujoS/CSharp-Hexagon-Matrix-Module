@@ -3,7 +3,7 @@
 1. Hex.Vector
 2. Hex.Matrix
 
-[here](#Hex.Square)
+[here](#HexSquare)
 
 # Classes
 
