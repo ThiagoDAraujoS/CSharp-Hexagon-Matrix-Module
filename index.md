@@ -7,34 +7,34 @@ h3, h2, ul, ol{
 Here there will be a description
 
 # Index:
-- ### public struct [Hex.Vector](#public-struct-HexVector-1)
-  - **[Static Unit Vectors](#Static-Unit-Vectors)**
-  - **[Constructors](#Constructors)**
-  - **[Operators](#Operators)**
+- ### public struct [Hex.Vector](#public-struct-hexvector-1)
+  - **[Static Unit Vectors](#static-unit-vectors)**
+  - **[Constructors](#constructors)**
+  - **[Operators](#operators)**
   - **Public Methods**
     - public _Vector3_ **[Position](#public-vector3-position-float-size--1f-float-height--0f)**
     - public _int_ **[Distance](#public-int-distance-hexvector-target)**
     - public static _Hex.Vector_ **[Round](#public-static-hexvector-round-vector3-vector)**
   - **Public Extensions**
-    - public static _Hex.Vector_ **[PointToHexVector](#public-static-HexVector-PointToHexVector-float-size--1f)**
-- ### public abstract class [Hex.Matrix\<T>](#public-abstract-class-HexMatrixT--IEnumerableT) : IEnumerable<T>
-  - **[Generic Data](https://duckduckgo.com)**
-  - **[Indexers](https://duckduckgo.com)**
-  - **[Constructor](https://duckduckgo.com)**
+    - public static _Hex.Vector_ **[PointToHexVector](#public-static-hexvector-pointtohexvector-float-size--1f)**
+- ### public abstract class [Hex.Matrix\<T>](#public-abstract-class-hexmatrixt--ienumerablet) : IEnumerable<T>
+  - **[Generic Data](#generic-data)**
+  - **[Indexers](#indexers)**
+  - **[Constructor](#constructor)**
   - **Public Methods**
-    - public _bool_ **[IsOutOfArrayBounds](https://duckduckgo.com)**
-    - public _void_ **[Foreach](https://duckduckgo.com)**
+    - public _bool_ **[IsOutOfArrayBounds](#public-bool-isoutofarraybounds)**
+    - public _void_ **[Foreach](#public-void-foreach)**
   - **Abstract Methods**
-    - public abstract _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
-    - protected abstract _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
-    - protected abstract _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
-- ### public class [Hex.Square\<T>](hexSquare.md) : [Hex.Matrix\<T>](hexMatrix.md)
-  - **[Properties](https://duckduckgo.com)**
-  - **[Constructors](https://duckduckgo.com)**
-  - **[Override Methods](https://duckduckgo.com)**
-    - public override _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
-    - protected override _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
-    - protected override _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
+    - public abstract _Hex.Vector_ **[Project1DArrayIntoHex](#public-abstract-hexvector-project1darrayintohex)**
+    - protected abstract _int_ **[MapHexInto1DArray](#protected-abstract-int-maphexinto1darray)**
+    - protected abstract _bool_ **[IsOutOfBounds](#protected-abstract-bool-isoutofbounds)**
+- ### public class [Hex.Square\<T>](#public-class-hexsquaret--hexmatrixt-1) : [Hex.Matrix\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
+  - **[Properties](#properties)**
+  - **[Constructors](#constructors-1)**
+  - **Override Methods**
+    - public override _Hex.Vector_ **[Project1DArrayIntoHex](#public-override-hexvector-project1darrayintohex)**
+    - protected override _int_ **[MapHexInto1DArray](#protected-override-int-maphexinto1darray)**
+    - protected override _bool_ **[IsOutOfBounds](#protected-override-bool-isoutofbounds)**
 
 
 ___
