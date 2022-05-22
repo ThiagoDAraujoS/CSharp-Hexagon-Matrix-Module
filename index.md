@@ -1,6 +1,6 @@
 <style>
 h3, h2, ul, ol{
-    margin: 0 0 5px;
+  margin: 0 0 5px;
 }
 </style>
 ## Description:
@@ -17,7 +17,7 @@ Here there will be a description
     - public static _Hex.Vector_ **[Round](https://duckduckgo.com)**
   - **Public Extensions**
     - public static _Hex.Vector_ **[PointToHexVector](https://duckduckgo.com)**
-- ### public abstract [Hex.Matrix<T>](https://duckduckgo.com) : IEnumerable<T>
+- ### public abstract [Hex.Matrix\<T>](https://duckduckgo.com) : IEnumerable<T>
   - **[Generic Data](https://duckduckgo.com)**
   - **[Indexers](https://duckduckgo.com)**
   - **[Constructor](https://duckduckgo.com)**
