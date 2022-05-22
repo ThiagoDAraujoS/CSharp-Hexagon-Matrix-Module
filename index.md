@@ -35,9 +35,13 @@ Here there will be a description
     - public override _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
     - protected override _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
     - protected override _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
+________________________________________________________________________________________________________
 
-
-
+<style>
+h3, h2, ul, ol{
+  margin: 0 0 20px;
+}
+</style>
 
 
 
