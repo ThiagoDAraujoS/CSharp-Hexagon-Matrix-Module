@@ -17,7 +17,7 @@ Here there will be a description
     - public static _Hex.Vector_ **[Round](https://duckduckgo.com)**
   - **Public Extensions**
     - public static _Hex.Vector_ **[PointToHexVector](https://duckduckgo.com)**
-- ### public abstract class [Hex.Matrix\<T>](https://duckduckgo.com) : IEnumerable<T>
+- ### public abstract class [Hex.Matrix\<T>](hexMatrix.md) : IEnumerable<T>
   - **[Generic Data](https://duckduckgo.com)**
   - **[Indexers](https://duckduckgo.com)**
   - **[Constructor](https://duckduckgo.com)**
