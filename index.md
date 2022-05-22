@@ -17,7 +17,7 @@ Here there will be a description
     - public static _Hex.Vector_ **[Round](https://duckduckgo.com)**
   - **Public Extensions**
     - public static _Hex.Vector_ **[PointToHexVector](https://duckduckgo.com)**
-- ### public abstract [Hex.Matrix\<T>](https://duckduckgo.com) : IEnumerable<T>
+- ### public abstract class [Hex.Matrix\<T>](https://duckduckgo.com) : IEnumerable<T>
   - **[Generic Data](https://duckduckgo.com)**
   - **[Indexers](https://duckduckgo.com)**
   - **[Constructor](https://duckduckgo.com)**
@@ -25,13 +25,21 @@ Here there will be a description
     - public _bool_ **[IsOutOfArrayBounds](https://duckduckgo.com)**
     - public _void_ **[Foreach](https://duckduckgo.com)**
   - **Abstract Methods**
-    - public abstract _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
     - public abstract _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
-    - public abstract _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
-- ### Hex.Square
-  - **Static Properties**
-  - **Properties**
-  - **Constructors**
-  - **Public Methods**
-  - **Static Methods**
-  - **Operators**
+    - protected abstract _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
+    - protected abstract _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
+- ### public class [Hex.Square\<T>](https://duckduckgo.com) : [Hex.Matrix\<T>](https://duckduckgo.com)
+  - **[Properties](https://duckduckgo.com)**
+  - **[Constructors](https://duckduckgo.com)**
+  - **[Override Methods](https://duckduckgo.com)**
+    - public override _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
+    - protected override _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
+    - protected override _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
+
+
+
+  
+
+
+
+
