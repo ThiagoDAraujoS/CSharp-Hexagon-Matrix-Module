@@ -11,7 +11,7 @@ Here there will be a description
         2. public _int_ **[Distance](https://duckduckgo.com)**
         3. public static _Vector_ **[Round](https://duckduckgo.com)**
     5. **Extensions**
-        4. public static _Vector_ **[PointToHexVector](https://duckduckgo.com)**
+       1. public static _Vector_ **[PointToHexVector](https://duckduckgo.com)**
 3. ### Hex.Matrix
     1. **Static Properties**
     2. **Properties**
