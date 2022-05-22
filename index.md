@@ -36,8 +36,6 @@ Here there will be a description
     - protected override _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
     - protected override _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
 
-
-
   
 
 
