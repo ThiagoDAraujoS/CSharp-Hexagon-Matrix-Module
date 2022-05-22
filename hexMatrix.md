@@ -1,6 +1,6 @@
 ---
 title: Hex Matrix
-layout: jekyll-theme-modernist
+theme: jekyll-theme-modernist
 filename: hexMatrix.md
 --- 
 
