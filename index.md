@@ -3,10 +3,10 @@ h3, h2, ul, ol{
   margin: 0 0 5px;
 }
 </style>
-## Description:
+# Description:
 Here there will be a description
 
-## Index:
+# Index:
 - ### public struct [Hex.Vector](hexVector.md)
   - **[Static Unit Vectors](https://duckduckgo.com)**
   - **[Constructors](https://duckduckgo.com)**
@@ -35,7 +35,10 @@ Here there will be a description
     - public override _Hex.Vector_ **[Project1DArrayIntoHex](https://duckduckgo.com)**
     - protected override _int_ **[MapHexInto1DArray](https://duckduckgo.com)**
     - protected override _bool_ **[IsOutOfBounds](https://duckduckgo.com)**
-________________________________________________________________________________________________________
+
+
+___
+
 
 <style>
 h3, h2, ul, ol{
@@ -64,6 +67,8 @@ And it contains a set of public X, Y and Z integers as properties.
 Hex.Vectors are considered illegal if the sum of their values dont
 equate to 0.
 
+___
+
 ## Members
 ### Static Unit Vectors
 #### Description
@@ -89,6 +94,8 @@ v += Hex.Vector.XPos;
 v += Hex.Vector.YNeg * 3;
 ~~~
 
+___
+
 ### Constructors
 #### Description
 Hex.Vector has a constructor that takes x and y coordinate as parameters.
@@ -109,6 +116,8 @@ Hex.vector v2 = new Hex.Vector(1, 2, 3);
 debug.log(v2.IsLegal); //false
 ~~~
 
+___
+
 ### Operators
 #### Description
 Hex.Vectors behaves like a vector in the mathematical sense.
@@ -123,6 +132,8 @@ public static Vector operator /(Vector v, int scalar);
 ~~~ c#
 Hex.Vector v = new Hex.Vector(1, 2) + new Hex.Vector(3, 4); //v = (4, 6, -10)
 ~~~
+
+___
 
 ### public _Vector3_ Position (float size = 1f, float height = 0f)
 #### Description
@@ -139,6 +150,8 @@ transform.position = new Hex.Vector(2, 3).Position();
 transform.position = new Hex.Vector(2, 3);
 ~~~
 
+___
+
 ### public _int_ Distance (Hex.Vector target)
 #### Description
 Return the distance in hexagons between the vector and the target.
@@ -148,6 +161,8 @@ Hex.Vector v = new Hex.Vector(1, 2);
 Hex.Vector v2 = new Hex.Vector(3, -4);
 int distance = v.Distance(v2);
 ~~~
+
+___
 
 ### public static _Hex.Vector_ Round (Vector3 vector)
 #### Description
@@ -168,6 +183,7 @@ The size parameter is used to scale the Vector3.
 Hex.Vector v = transform.position.PointToHexVector();
 ~~~
 
+___
 
 
 
