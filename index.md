@@ -7,17 +7,17 @@ h3, h2, ul, ol{
 Here there will be a description
 
 # Index:
-- ### public struct [Hex.Vector](hexVector.md)
-  - **[Static Unit Vectors](https://duckduckgo.com)**
-  - **[Constructors](https://duckduckgo.com)**
-  - **[Operators](https://duckduckgo.com)**
+- ### public struct [Hex.Vector](#public-struct-HexVector-1)
+  - **[Static Unit Vectors](#Static-Unit-Vectors)**
+  - **[Constructors](#Constructors)**
+  - **[Operators](#Operators)**
   - **Public Methods**
-    - public _Vector3_ **[Position](https://duckduckgo.com)**
-    - public _int_ **[Distance](https://duckduckgo.com)**
-    - public static _Hex.Vector_ **[Round](https://duckduckgo.com)**
+    - public _Vector3_ **[Position](#public-vector3-position-float-size--1f-float-height--0f)**
+    - public _int_ **[Distance](#public-int-distance-hexvector-target)**
+    - public static _Hex.Vector_ **[Round](#public-static-hexvector-round-vector3-vector)**
   - **Public Extensions**
-    - public static _Hex.Vector_ **[PointToHexVector](https://duckduckgo.com)**
-- ### public abstract class [Hex.Matrix\<T>](hexMatrix.md) : IEnumerable<T>
+    - public static _Hex.Vector_ **[PointToHexVector](#public-static-HexVector-PointToHexVector-float-size--1f)**
+- ### public abstract class [Hex.Matrix\<T>](#public-abstract-class-HexMatrixT--IEnumerableT) : IEnumerable<T>
   - **[Generic Data](https://duckduckgo.com)**
   - **[Indexers](https://duckduckgo.com)**
   - **[Constructor](https://duckduckgo.com)**
@@ -176,7 +176,7 @@ ___
 
 ## Public Extensions
 
-## public static _Hex.Vector_ PointToHexVector (this Vector3 point, float size = 1f)
+## public static _Hex.Vector_ PointToHexVector (float size = 1f)
 ### Description
 Extends the Vector3 class to convert a point in the 3d space to a Hex.Vector.
 The size parameter is used to scale the Vector3.
@@ -200,7 +200,7 @@ ___
 
 
 
-# public abstract class Hex.Matrix\<T> : IEnumerable<T>
+# public abstract class Hex.Matrix\<T> : IEnumerable\<T>
 ## Description
 
 
