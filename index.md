@@ -6,12 +6,18 @@ Here there will be a description
     1. **[Static Unit Vectors](https://duckduckgo.com)**
     2. **[Constructors](https://duckduckgo.com)**
     3. **[Operators](https://duckduckgo.com)**
-    4. **Public Methods**
+   4. <details><summary><b>Public Methods</b></summary>
+    
         1. public _Vector3_ **[Position](https://duckduckgo.com)**
         2. public _int_ **[Distance](https://duckduckgo.com)**
         3. public static _Vector_ **[Round](https://duckduckgo.com)**
-    5. **Extensions**
+   </details>
+   
+   6. <details><summary><b>Extensions</b></summary>
+      
        1. public static _Vector_ **[PointToHexVector](https://duckduckgo.com)**
+   </details>
+
 3. ### Hex.Matrix
     1. **Static Properties**
     2. **Properties**
