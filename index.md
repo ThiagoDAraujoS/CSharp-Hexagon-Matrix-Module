@@ -3,17 +3,15 @@ Here there will be a description
 
 ## Documentation:
 1. ### Hex.Vector
-   1. [**Static Unit Vectors**](https://duckduckgo.com)
-   2. **[Static Unit Vectors](https://duckduckgo.com)**
-   3. [Static Unit Vectors](https://duckduckgo.com)
-   4. **Constructors** 
-   5. **Operators**
-   6. **Public Methods**
-      1. public _Vector3_ **Position**
-      2. public _int_ **Distance**
-      3. public static _Vector_ **Round**
-   7. **Extensions**
-      1. public static _Vector_ **PointToHexVector**
+   1. **[Static Unit Vectors](https://duckduckgo.com)**
+   2. **[Constructors](https://duckduckgo.com)** 
+   3. **[Operators](https://duckduckgo.com)**
+   4. **Public Methods**
+      1. public _Vector3_ **[Position](https://duckduckgo.com)**
+      2. public _int_ **[Distance](https://duckduckgo.com)**
+      3. public static _Vector_ **[Round](https://duckduckgo.com)**
+   5. **Extensions**
+      4. public static _Vector_ **[PointToHexVector](https://duckduckgo.com)**
 3. ### Hex.Matrix
    1. **Static Properties** 
    2. **Properties**
