@@ -2,7 +2,7 @@
 Here there will be a description
 
 ## Documentation:
-- ### Hex.Vector
+1. ### Hex.Vector
    - **[Static Unit Vectors](https://duckduckgo.com)**
    - **[Constructors](https://duckduckgo.com)**
    - **[Operators](https://duckduckgo.com)**
@@ -11,12 +11,17 @@ Here there will be a description
      - public _Vector3_ **[Position](https://duckduckgo.com)**
      - public _int_ **[Distance](https://duckduckgo.com)**
      - public static _Vector_ **[Round](https://duckduckgo.com)**
+     
      </details>
+   
    - <details><summary><b>Extensions</b></summary>
       
       - public static _Vector_ **[PointToHexVector](https://duckduckgo.com)**
+     
      </details>
-- ### Hex.Matrix
+      
+
+2. ### Hex.Matrix
     1. **Static Properties**
     2. **Properties**
     3. **Constructors**
