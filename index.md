@@ -1,11 +1,17 @@
-## Description
+---
+title: Hexagonal Matrix Module
+description: testest
+---
+
 ## Index
-1. Hex.Vector
-2. Hex.Matrix
+1. [Description](#Description)
+1. [Classes](#Classes)
+    - [Hex.Vector](#HexVector)
+    - [Hex.Matrix](#HexMatrix)
+    - [Hex.Square](#HexSquare)
 
-[here](#HexSquare)
-
-# Classes
+## Description
+## Classes
 
 ## Hex.Vector
 ### Description
@@ -29,6 +35,77 @@ public static Main
 ### Example
 ~~~ c#
 ~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~~~ C#
+    struct Vector Hex.Vector
+    
+    Variables
+    int x, y, z;
+    
+    Constructor
+    Vector(int x, int y, int z);
+    Vector(int x, int y);
+
+    Static Readonly
+    static readonly Vector XPos = new Vector( 0,  1, -1);
+    static readonly Vector XNeg = new Vector( 0, -1,  1);
+    static readonly Vector YPos = new Vector( 1,  0, -1);
+    static readonly Vector YNeg = new Vector(-1,  0,  1);
+    static readonly Vector ZPos = new Vector( 1, -1,  0);
+    static readonly Vector ZNeg = new Vector(-1,  1,  0);
+
+    Methods
+    Vector3 Position(float size, float height = 0f);
+    int Distance(Vector target);
+    static Vector Round(Vector3 vector);
+    
+    Properties
+    public bool IsLegal;
+    
+    Operators
+    public static implicit operator Vector3(Vector v) => v.Position(1f);
+    public static Vector operator +(Vector v1, Vector v2) => new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+    public static Vector operator -(Vector v1, Vector v2) => new Vector(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
+    public static Vector operator *(Vector v, int scalar) => new Vector(v.x * scalar, v.y * scalar, v.z * scalar);
+    public static Vector operator /(Vector v, int scalar) => new Vector(v.x / scalar, v.y / scalar, v.z / scalar);
+    
+    Overrides
+    public override string ToString();
+
+    
+
+    public static Vector PointToHexVector(this Vector3 point, float size = 1f);
+
+
+~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
