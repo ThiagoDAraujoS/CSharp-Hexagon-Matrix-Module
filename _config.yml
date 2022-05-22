@@ -1,5 +1,5 @@
 title: Hexagonal Matrix Module
-description: Small Module for building a Hexagonal Matrix Data Structure
+description: Small module for building a HexMatrix data structure
 theme: jekyll-theme-modernist
 remote_theme: pages-themes/modernist@v0.2.0
 plugins:
