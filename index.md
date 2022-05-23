@@ -5,25 +5,25 @@ ul h3, ul{
 </style>
 
 # Index:
-- ### struct [Hex.Vector](#public-struct-hexvector-1)
+- ### struct [Hex.Vector](#public-struct-hexvector)
   - **[Static Unit Vectors](#static-unit-vectors)**
-  - **[Constructor](#constructors)**
+  - **[Constructor](#constructor)**
   - **[Operators](#operators)**
   - **Public Methods**
-    - **[Position](#public-vector3-position-float-size--1f-float-height--0f)**
-    - **[Distance](#public-int-distance-hexvector-target)**
+    - **[Position](#position)**
+    - **[Distance](#distance)**
   - **Public Extensions**
-    - **[WorldPositionToHexVector](#public-static-hexvector-pointtohexvector-float-size--1f)**
-- ### abstract class [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet) : IEnumerable<T>
+    - **[WorldPositionToHexVector](#worldpositiontohexvector)**
+- ### abstract class [Hex.Array\<T>](#public-abstract-hexarrayt--ienumerable) : IEnumerable<T>
   - **[Indexers](#indexers)**
   - **Public Methods**
-    - **[Foreach](#public-void-foreach)**
+    - **[Foreach](#foreach)**
   - **Abstract Methods**
-    - **[GetId](#public-abstract-hexvector-project1darrayintohex)**
-    - **[GetIndex](#protected-abstract-int-maphexinto1darray)**
-    - **[IsOutOfBounds](#protected-abstract-bool-isoutofbounds)**
-- ### class [Hex.Square\<T>](#public-class-hexsquaret--hexmatrixt-1) : [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
-  - **[Constructors](#constructors-1)**
+    - **[GetId](#getid)**
+    - **[GetIndex](#getindex)**
+    - **[IsOutOfBounds](#isoutofbounds)**
+- ### class [Hex.Square\<T>](#public-class-hexsquaret--hexarrayt) : [Hex.Array\<T>](#public-abstract-hexarrayt--ienumerable)
+  - **[Constructor](#constructor-1)**
   - **[Properties](#properties)**
 
 
@@ -98,7 +98,7 @@ ___
 ## Public Methods
 ## Position
 ### Description
-Returns a position in the 3d space represented by the hex.vector.
+Returns a position in the 3d space represented by the Hex.Vector.
 The scale and height parameters are used to scale the vector in the 3d space.
 A Hex.Vector will be implicitly casted into Vector3 using the Position() function.
 ~~~ c#
@@ -149,12 +149,14 @@ ___
 ## Description
 Base class for all hexagonal data structures. It wraps an array with generic T objects
 and provides a set of methods to manipulate the array using the hexagonal cube space.
+
 Child classes should ideally represent different shapes of hexagonal data structures.
+
 ___
 
 ## Indexers
 ### Description
-The indexers are used to access the array using hex vectors or a set of hex vector components.
+The indexers are used to access the array using Hex.Vectors or a set of Hex.Vector components.
 ~~~ c#
 public T this[Vector id];
 public T this[int x, int y];
@@ -170,7 +172,7 @@ ___
 ## Public Methods
 ## Foreach
 provides a foreach loop to iterate over the array while exposing
-the hexVector Id and reference to the value.
+the Hex.Vector Id and reference to the value.
 ### Description
 ~~~ c#
 public delegate void ExplicitForeachOperationDelegate(Vector id, ref T item);
@@ -188,19 +190,19 @@ ___
 ## Abstract Methods
 ## GetId
 ### Description
-Returns the hex.vector that represents the id of the array.
+Returns the Hex.Vector that represents the id of the array.
 ~~~ c#
 public abstract Vector GetId(int index);
 ~~~
 ### Example
 ~~~ c#
-// get the hex.vector id of the object stored in the position 0 of the array
+//Get the hex.vector id of the object stored in the position 0 of the array
 Hex.Vector id = hexArray.GetId(0);
 ~~~
 
 ___
 
-# GetIndex
+## GetIndex
 ### Description
 Returns the index of the object represented by the Hex.Vector.
 ~~~ c#
@@ -229,12 +231,15 @@ public abstract bool IsOutOfBounds(Vector id);
 
 ___
 
+<br>
+
 # public class Hex.Square\<T> : [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
 ## Description
 Hex.Square implements Hex.Array and represents a rectangular 2d array of hexagons.
+
 ___
 
-## Constructors
+## Constructor
 ### Description
 ~~~ c#
 public Square(int length, int height);
