@@ -14,7 +14,7 @@ ul h3, ul{
     - **[Distance](#public-int-distance-hexvector-target)**
   - **Public Extensions**
     - **[WorldPositionToHexVector](#public-static-hexvector-pointtohexvector-float-size--1f)**
-- ### abstract class [Hex.Matrix\<T>](#public-abstract-class-hexmatrixt--ienumerablet) : IEnumerable<T>
+- ### abstract class [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet) : IEnumerable<T>
   - **[Indexers](#indexers)**
   - **Public Methods**
     - **[Foreach](#public-void-foreach)**
@@ -22,13 +22,10 @@ ul h3, ul{
     - **[GetId](#public-abstract-hexvector-project1darrayintohex)**
     - **[GetIndex](#protected-abstract-int-maphexinto1darray)**
     - **[IsOutOfBounds](#protected-abstract-bool-isoutofbounds)**
-- ### class [Hex.Square\<T>](#public-class-hexsquaret--hexmatrixt-1) : [Hex.Matrix\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
-  - **[Properties](#properties)**
+- ### class [Hex.Square\<T>](#public-class-hexsquaret--hexmatrixt-1) : [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
   - **[Constructors](#constructors-1)**
-  - **Override Methods**
-    - **[GetId](#public-override-hexvector-project1darrayintohex)**
-    - **[GetIndex](#protected-override-int-maphexinto1darray)**
-    - **[IsOutOfBounds](#protected-override-bool-isoutofbounds)**
+  - **[Properties](#properties)**
+
 
 <br>
 
@@ -58,13 +55,13 @@ public static readonly Hex.Vector ZNeg;
 ~~~
 ### Example
 ~~~ c#
-//Create a new hex.vector
+//Create a new hex.vector.
 Hex.Vector v = new Hex.Vector(0, 0);
 
-//Move the vector 1 into the x direction
+//Move the vector 1 into the x direction.
 v += Hex.Vector.XPos;
 
-//Move the vector 3 hexes into the -y direction
+//Move the vector 3 hexes into the -y direction.
 v += Hex.Vector.YNeg * 3;
 ~~~
 
@@ -91,6 +88,8 @@ public static Vector operator /(Vector v, int scalar);
 ~~~
 ### Example
 ~~~ c#
+//Create a new hex.vector by adding two vectors.
+//The third parameter is inferred from the x and y values.
 Hex.Vector v = new Hex.Vector(1, 2) + new Hex.Vector(3, 4); //v = (4, 6, -10)
 ~~~
 
@@ -101,7 +100,7 @@ ___
 ### Description
 Returns a position in the 3d space represented by the hex.vector.
 The scale and height parameters are used to scale the vector in the 3d space.
-A Hex.Vector will be implicitly casted into Vector3 using the Position() function
+A Hex.Vector will be implicitly casted into Vector3 using the Position() function.
 ~~~ c#
 public static implicit operator Vector3(Hex.Vector v);
 public Vector3 Position (float scale = 1f, float height = 0f);
@@ -124,7 +123,7 @@ public int Distance (Hex.Vector target);
 ~~~ c#
 Hex.Vector v = new Hex.Vector(1, 2);
 Hex.Vector v2 = new Hex.Vector(3, -4);
-int distance = v.Distance(v2); //distance = 5
+int distance = v.Distance(v2); //distance = 5.
 ~~~
 
 ___
@@ -146,28 +145,42 @@ ___
 
 <br>
 
-# public abstract Hex.Matrix\<T> : IEnumerable<T>
+# public abstract Hex.Array\<T> : IEnumerable<T>
 ## Description
-
+Base class for all hexagonal data structures. It wraps an array with generic T objects
+and provides a set of methods to manipulate the array using the hexagonal cube space.
+Child classes should ideally represent different shapes of hexagonal data structures.
 ___
 
 ## Indexers
 ### Description
+The indexers are used to access the array using hex vectors or a set of hex vector components.
 ~~~ c#
+public T this[Vector id];
+public T this[int x, int y];
 ~~~
 ### Example
 ~~~ c#
+hexArray[new Hex.Vector(1, 2)] = 1;
+hexArray[1, 2] = 2;
 ~~~
 
 ___
 
 ## Public Methods
 ## Foreach
+provides a foreach loop to iterate over the array while exposing
+the hexVector Id and reference to the value.
 ### Description
 ~~~ c#
+public delegate void ExplicitForeachOperationDelegate(Vector id, ref T item);
+public void Foreach(ExplicitForeachOperationDelegate action);
 ~~~
 ### Example
 ~~~ c#
+hexArray.Foreach((Hex.Vector id, ref string item) => 
+    item = id.ToString(); 
+});
 ~~~
 
 ___
@@ -175,87 +188,81 @@ ___
 ## Abstract Methods
 ## GetId
 ### Description
+Returns the hex.vector that represents the id of the array.
 ~~~ c#
+public abstract Vector GetId(int index);
 ~~~
 ### Example
 ~~~ c#
+// get the hex.vector id of the object stored in the position 0 of the array
+Hex.Vector id = hexArray.GetId(0);
 ~~~
 
 ___
 
 # GetIndex
 ### Description
+Returns the index of the object represented by the Hex.Vector.
 ~~~ c#
+public abstract int GetIndex(Vector id);
 ~~~
 ### Example
 ~~~ c#
+//Create a new hex.vector.
+Hex.Vector id = new Hex.Vector(1, 2);
+
+//Check if the hex.vector is not out of bounds.
+if(!hexArray.IsOutOfBounds(id))
+
+    //Get the index of the hex.vector
+    int index = hexArray.GetIndex(id);
 ~~~
 
 ___
 
 ## IsOutOfBounds
 ### Description
+Returns true if the hex.vector is out of bounds.
 ~~~ c#
-~~~
-### Example
-~~~ c#
+public abstract bool IsOutOfBounds(Vector id);
 ~~~
 
 ___
 
-# public class Hex.Square\<T> : [Hex.Matrix\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
+# public class Hex.Square\<T> : [Hex.Array\<T>](#public-abstract-class-hexmatrixt--ienumerablet)
 ## Description
+Hex.Square implements Hex.Array and represents a rectangular 2d array of hexagons.
+___
+
+## Constructors
+### Description
+~~~ c#
+public Square(int length, int height);
+~~~
+### Example
+~~~ c#
+//Create a new 3 by 4 Hex.Square data structure.
+Hex.Square<int> square = new Hex.Square<int>(3, 4);
+~~~
 
 ___
 
 ## Properties
 ### Description
 ~~~ c#
+public int Length {get};
+public int Height {get};
 ~~~
 ### Example
 ~~~ c#
+//Create a new 3 by 4 Hex.Square data structure.
+Hex.Square<int> square = new Hex.Square<int>(3, 4);
+
+Debug.Log(square.Length); //3
+Debug.Log(square.Height); //4
 ~~~
 
 ___
 
-## Constructors
-### Description
-~~~ c#
-~~~
-### Example
-~~~ c#
-~~~
 
-___
-
-## Override Methods
-## GetId
-### Description
-~~~ c#
-~~~
-### Example
-~~~ c#
-~~~
-
-___
-
-## GetIndex
-### Description
-~~~ c#
-~~~
-### Example
-~~~ c#
-~~~
-
-___
-
-## IsOutOfBounds
-### Description
-~~~ c#
-~~~
-### Example
-~~~ c#
-~~~
-
-___
 
