@@ -34,8 +34,8 @@ ___
 # public struct Hex.Vector
 ## Description
 Hex.Vector is a immutable struct that represents a 3d vector in the hexagonal cube space.
-It can be used to represent a position in a hexagonal grid.
-And it contains a set of public X, Y and Z integers as properties.
+It is used to represent a position in a hexagonal grid.
+It contains a set of public X, Y and Z integers as properties.
 Hex.Vectors are considered illegal if the sum of their values dont
 equate to 0.
 
@@ -43,8 +43,9 @@ ___
 
 ## Members
 ## Static Unit Vectors
-The static unit vectors a set of six readonly vectors used to represent the six directions of the hexagonal cube space.
-They are used to manipulate the hex.vector in the space.
+The static unit vectors are a set of six readonly vectors used to represent the six directions
+of the hexagonal cube space.
+They are used to manipulate a Hex.Vector in the cube space.
 ~~~ c#
 public static readonly Hex.Vector XPos;
 public static readonly Hex.Vector XNeg;
