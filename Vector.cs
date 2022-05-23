@@ -10,7 +10,7 @@ namespace Hex {
         public readonly int x, y, z;
 
         ///<summary>
-        /// Builds vector from xyz coordinates
+        /// Builds vector from xyz cube coordinates
         /// </summary>
         public Vector(int x, int y, int z) {
             this.x = x;
@@ -18,6 +18,9 @@ namespace Hex {
             this.z = z;
         }
 
+        /// <summary>
+        /// Builds a vector from a xy axial coordinates
+        /// </summary>
         public Vector(int x, int y) {
             this.x = x;
             this.y = y;
@@ -26,36 +29,53 @@ namespace Hex {
 
         public static readonly Vector XPos = new Vector(0, 1, -1);
         public static readonly Vector XNeg = new Vector(0, -1, 1);
-
         public static readonly Vector YPos = new Vector(1, 0, -1);
         public static readonly Vector YNeg = new Vector(-1, 0, 1);
-
         public static readonly Vector ZPos = new Vector(1, -1, 0);
         public static readonly Vector ZNeg = new Vector(-1, 1, 0);
 
+        /// <summary>
+        /// shorthand for 3 squared;
+        /// </summary>
         public static readonly float RootOf3 = Mathf.Sqrt(3f);
 
         ///<summary>
         /// Returns a physical position of a given hexagon inside this container
         /// </summary>
-        public Vector3 Position(float size = 1f, float height = 0f) =>
+        public Vector3 Position(float scale = 1f, float height = 0f) =>
             new Vector3(
-                size * (RootOf3 * x + RootOf3 / 2f * y),
+                scale * (RootOf3 * x + RootOf3 / 2f * y),
                 height,
-                size * (3f / 2f * y));
+                scale * (3f / 2f * y));
 
+        /// <summary>
+        /// Calculate the distance between two hexagons
+        /// </summary>
         public int Distance(Vector target) =>
             (System.Math.Abs(x - target.x) + System.Math.Abs(y - target.y) + System.Math.Abs(z - target.z)) / 2;
 
+        /// <summary>
+        /// Verify if the given hexagon is legal
+        /// </summary>
         public bool IsLegal => x + y + z == 0;
 
+        /// <summary>
+        /// Convert Hex.vector to world position
+        /// </summary>
         public static implicit operator Vector3(Vector v) => v.Position();
 
-        public void Validate() {
+        /// <summary>
+        /// throw exception if the hexagon is illegal
+        /// </summary>
+        public Vector Validate() {
+            if (!IsLegal) {
 #if(UNITY_EDITOR)
-            if (!IsLegal)
-                throw new System.Exception("Illegal vector initialized");
+                throw new System.Exception("Illegal " + ToString() + " vector is not allowed");
+#else
+                return Fix();
 #endif
+            }
+            return this;
         }
 
         public static Vector operator +(Vector v1, Vector v2) => new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
@@ -69,7 +89,7 @@ namespace Hex {
         public override string ToString() => "Hex - X." + x + " Y." + y + " Z." + z;
 
         ///<summary>
-        /// Rounds a float Hex vector into a int hex vector
+        /// Rounds a float Hex vector into a legal int hex vector
         /// </summary>
         public static Vector Round(Vector3 vector) {
             int roundX = Mathf.RoundToInt(vector.x),
@@ -86,15 +106,23 @@ namespace Hex {
                 roundZ = -roundX - roundY;
             return new Vector(roundX, roundY, roundZ);
         }
+
+        /// <summary>
+        /// return a legal vector from a given vector
+        /// </summary>
+        public Vector Fix() =>
+            IsLegal ? this : new Vector(
+                Mathf.RoundToInt((x + x - y - z) / 3f),
+                Mathf.RoundToInt((y + y - x - z) / 3f));
     }
 
     public static class Vector3Extension {
         ///<summary>
         /// Returns a hexagon ID from a x and z coordinate position
         ///</summary>
-        public static Vector PointToHexVector(this Vector3 point, float size = 1f) {
-            float ix = (Vector.RootOf3 / 3f * point.x - 1f / 3f * point.z) / size;
-            float iy = (2f / 3f * point.z) / size;
+        public static Vector WorldPositionToHexVector(this Vector3 position, float scale = 1f) {
+            float ix = (Vector.RootOf3 / 3f * position.x - 1f / 3f * position.z) / scale;
+            float iy = (2f / 3f * position.z) / scale;
             return Vector.Round(new Vector3(ix, iy, -ix - iy));
         }
     }
