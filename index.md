@@ -1,8 +1,9 @@
 <style>
-h3, h2, ul, ol{
-  margin: 0 0 5px;
+ul h3, ul{
+  margin: 0 0 4px;
 }
 </style>
+
 # Index:
 - ### struct [Hex.Vector](#public-struct-hexvector-1)
   - **[Static Unit Vectors](#static-unit-vectors)**
@@ -28,22 +29,16 @@ h3, h2, ul, ol{
     - **[GetId](#public-override-hexvector-project1darrayintohex)**
     - **[GetIndex](#protected-override-int-maphexinto1darray)**
     - **[IsOutOfBounds](#protected-override-bool-isoutofbounds)**
-    
+
+<br>
+
 ___
-
-
-<style>
-h3, h2, ul, ol{
-  margin: 0 0 20px;
-}
-</style>
 
 # public struct Hex.Vector
 ## Description
 Hex.Vector is a immutable struct that represents a 3d vector in the hexagonal cube space.
 It can be used to represent a position in a hexagonal grid.
 And it contains a set of public X, Y and Z integers as properties.
-
 Hex.Vectors are considered illegal if the sum of their values dont
 equate to 0.
 
@@ -52,7 +47,7 @@ ___
 ## Members
 ## Static Unit Vectors
 The static unit vectors a set of six readonly vectors used to represent the six directions of the hexagonal cube space.
-They are used to manipulate the hex.vector in the hexagonal cube space.
+They are used to manipulate the hex.vector in the space.
 ~~~ c#
 public static readonly Hex.Vector XPos;
 public static readonly Hex.Vector XNeg;
@@ -138,7 +133,7 @@ ___
 ## WorldPositionToHexVector
 ### Description
 Extends the Vector3 class to convert a point in the 3d space to a Hex.Vector.
-The size parameter is used to scale the Vector3.
+The scale parameter is used to scale the Vector3.
 ~~~ c#
 public static Vector WorldPositionToHexVector(this Vector3 position, float scale = 1f);
 ~~~
@@ -147,9 +142,9 @@ public static Vector WorldPositionToHexVector(this Vector3 position, float scale
 Hex.Vector v = transform.position.WorldPositionToHexVector();
 ~~~
 
+___
 
-~~~ c#
-~~~
+<br>
 
 # public abstract Hex.Matrix\<T> : IEnumerable<T>
 ## Description
