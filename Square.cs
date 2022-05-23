@@ -12,7 +12,7 @@
 		///<summary>
 		/// This maps an axial coordinate system into a 1D index, its used to access the data array containing the Hex's info
 		/// </summary>
-		protected override int GetIndex(Vector id) => Length * id.y + id.x + id.y / 2;
+		public override int GetIndex(Vector id) => Length * id.y + id.x + id.y / 2;
 		
 
 		/// <summary>
@@ -26,7 +26,7 @@
 		///<summary>
 		/// project a index into a 3D Hexagon Vector
 		/// </summary>
-		protected override Vector GetId(int index) {
+		public override Vector GetId(int index) {
 			int y = index / Length;
 			int x = index % Length - y / 2;
 			return new Vector(x, y);

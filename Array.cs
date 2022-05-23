@@ -47,7 +47,7 @@ namespace Hex {
 		/// </summary>
 		/// <returns>1D Index</returns>
 		//protected abstract int GetId(int x, int y);
-		protected abstract int GetIndex(Vector id);
+		public abstract int GetIndex(Vector id);
 		
 		/// <summary>
 		/// Check if Cube hex.vector id is out of bounds
@@ -61,7 +61,7 @@ namespace Hex {
 		/// </summary>
 		/// <param name="index">1D Index</param>
 		/// <returns>vector id</returns>
-		protected abstract Vector GetId(int index);
+		public abstract Vector GetId(int index);
 
 		/// <summary>
 		/// Delegate used to iterate over the elements of this data structure
