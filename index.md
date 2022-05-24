@@ -191,7 +191,8 @@ ___
 ## Abstract Methods
 ## GetId
 ### Description
-Returns the Hex.Vector that represents the id of the array.
+The Id refers to the position of the element in the hexagonal cube space.
+GetId uses the index of the element to calculate its Id.
 ~~~ c#
 public abstract Vector GetId(int index);
 ~~~
@@ -205,7 +206,8 @@ ___
 
 ## GetIndex
 ### Description
-Returns the index of the object represented by the Hex.Vector.
+The Index refers to the position of the object in the internal array.
+GetIndex uses the Id of the object to calculate its index.
 ~~~ c#
 public abstract int GetIndex(Vector id);
 ~~~
